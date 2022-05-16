@@ -1,7 +1,7 @@
 name: CI WordleOfGod
 
 env:
-  PUBLISH_DIR: bin/Release/net6.0/publish/wwwroot
+  PUBLISH_DIR: WordleOfGod/bin/Release/net6.0/publish/wwwroot
 
 on:
   push:
