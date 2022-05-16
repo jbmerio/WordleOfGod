@@ -6,25 +6,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>WordleOfGod</title>
     <base href="/" />
-    <!--<link href="css/bootstrap/bootstrap.min.css" rel="stylesheet" />-->
+    <link href="https://cdn.jsdelivr.net/gh/SebastianAigner/twemoji-amazing@1.0.0/twemoji-amazing.css" rel="stylesheet" />
     <link href="css/app.css" rel="stylesheet" />
-    <!--<link href="WordleOfGod.styles.css" rel="stylesheet" />-->
+    <link href="css/tailwind.css" rel="stylesheet" />
+    <link href="_content/Blazored.Toast/blazored-toast.min.css" rel="stylesheet" />
     <link href="manifest.json" rel="manifest" />
     <link rel="apple-touch-icon" sizes="512x512" href="icon-512.png" />
     <link rel="apple-touch-icon" sizes="192x192" href="icon-192.png" />
 </head>
 
-<body>
-    <div id="app">Loading...</div>
+<body class="bg-slate-900">
+    <div id="app">
+        <div class="grid h-screen w-full">
+            <img src="icon-512.png" class="animate-bounce place-self-center" />
+        </div>
+    </div>
 
     <div id="blazor-error-ui">
         An unhandled error has occurred.
         <a href="" class="reload">Reload</a>
         <a class="dismiss">🗙</a>
     </div>
+
+    <script>
+        function pageLoaded() {
+            var acc = document.getElementsByClassName("accordion")[0];
+            acc.classList.toggle("active");
+            var panel = acc.nextElementSibling;
+            if (!panel.style.maxHeight) {
+                panel.style.maxHeight = panel.scrollHeight + "px";
+            }
+        }
+    </script>
     <script src="_framework/blazor.webassembly.js"></script>
     <script>navigator.serviceWorker.register('service-worker.js');</script>
 </body>
-
 </html>
- 

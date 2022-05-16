@@ -1,39 +1,21 @@
-﻿<div class="top-row ps-3 navbar navbar-dark">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="">WordleOfGod</a>
-        <button title="Navigation menu" class="navbar-toggler" @onclick="ToggleNavMenu">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-    </div>
-</div>
-
-<div class="@NavMenuCssClass" @onclick="ToggleNavMenu">
-    <nav class="flex-column">
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
-                <span class="oi oi-home" aria-hidden="true"></span> Home
-            </NavLink>
+﻿<div class="grid">
+    <nav class="bg-slate-200 rounded-b-lg lg:w-6/12 h-12 place-self-center flex">
+        <NavLink class="h-full mx-3 flex" href="">
+            <img src="icon-192.png" alt="Logo Wordle of God">
+        </NavLink>
+        <div class="flex flex-grow h-full">
+            <p class="text-center font-bold text-5xl w-full">Word<span class="text-green-600">le</span> of God</p>
         </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="counter">
-                <span class="oi oi-plus" aria-hidden="true"></span> Counter
+        <div class="flex flex-row-reverse align-middle h-full">
+            <NavLink class="h-full mx-1 text-2xl" href="settings">
+                <i class="twa twa-gear h-full" />
             </NavLink>
-        </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="fetchdata">
-                <span class="oi oi-list-rich" aria-hidden="true"></span> Fetch data
+            <NavLink class="h-full text-2xl hidden" href="stats">
+                <i class="twa twa-bar-chart h-full" />
+            </NavLink>
+            <NavLink class="h-full ml-1 text-2xl" href="help">
+                <i class="twa twa-red-question-mark h-full" />
             </NavLink>
         </div>
     </nav>
 </div>
-
-@code {
-    private bool collapseNavMenu = true;
-
-    private string? NavMenuCssClass => collapseNavMenu ? "collapse" : null;
-
-    private void ToggleNavMenu()
-    {
-        collapseNavMenu = !collapseNavMenu;
-    }
-}
