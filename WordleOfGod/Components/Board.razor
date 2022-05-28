@@ -1,12 +1,12 @@
 ﻿<div class="grid">
     <div class="w-full place-self-center">
-        @foreach (var guess in Helper.Guesses)
+        @foreach (var guess in Helper.TodayGuesses)
         {
             <div class="mb-2 h-10 flex flex-row">
-                <div class="@inputClass grow">
-                    <p class="bg-white-800 w-max px-2 font-bold">@guess.Text</p>
+                <div class="@inputClass grow flex-initial">
+                    <p class="bg-white-800 px-2 font-bold">@guess.Text</p>
                 </div>
-                <div class="@inputClass ml-3 basis-12">
+                <div class="@inputClass ml-3 basis-12 flex-none">
                     @switch (@guess.Position)
                     {
                         case Position.Before:
@@ -32,7 +32,7 @@
                             break;
                     }
                 </div>
-                <div class="@inputClass ml-3 basis-12">
+                <div class="@inputClass ml-3 w-12 basis-12 flex-none">
                     @if (guess.Score is not null)
                     {
                         <p class="bg-slate-800 place-self-center tooltip">
@@ -51,18 +51,18 @@
 
     protected async override Task OnInitializedAsync()
     {
-        var guesses = await LocalStorage.ContainKeyAsync(nameof(Helper.Guesses))
-                        ? await LocalStorage.GetItemAsync<List<Guess>>(nameof(Helper.Guesses))
+        Helper.Guesses = await LocalStorage.ContainKeyAsync(nameof(Helper.Guesses))
+                        ? await LocalStorage.GetItemAsync<ObservableCollection<Guess>>(nameof(Helper.Guesses))
                         : new();
 
-        if (!Helper.Guesses.Any())
+        if (!Helper.TodayGuesses.Any())
         {
-            Helper.Guesses.AddRange(guesses);
-            for (int i = 0; Helper.Guesses.Count < 6; i++)
+            Helper.TodayGuesses.AddRange(Helper.Guesses.Where(g => g.Date == DateTime.Today));
+            for (int i = 0; Helper.TodayGuesses.Count < 6; i++)
             {
                 Helper.Guesses.Add(new());
             }
-            foreach (var guess in Helper.Guesses)
+            foreach (var guess in Helper.TodayGuesses)
             {
                 guess.Send += StateHasChanged;
             }

@@ -1,15 +1,35 @@
-﻿using WordleOfGod.Models;
+﻿using System.Collections.ObjectModel;
+using System.Collections.Specialized;
+using WordleOfGod.Models;
 
 namespace WordleOfGod.Utils;
 
 public static class Helper
 {
+	private static List<Guess>? _todayGuesses;
+	private static ObservableCollection<Guess> guesses = Guesses = new();
+
 	public static DateTime RandomDate
 		=> DateTime.Today.AddDays(new Random(Convert.ToInt32(DateTime.Today.Ticks % int.MaxValue)).Next(-(DateTime.Today - new DateTime(2016, 1, 2)).Days, (DateTime.Today.AddMonths(5) - DateTime.Today).Days));
 
 	public static string Answer { get; set; } = "";
 
-	public static List<Guess> Guesses { get; set; } = new();
+	public static ObservableCollection<Guess> Guesses
+	{
+		get => guesses;
+		set
+		{
+			guesses = value;
+			guesses.CollectionChanged += Guesses_CollectionChanged;
+		}
+	}
+
+	private static void Guesses_CollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
+	{
+		_todayGuesses = null;
+	}
+
+	public static List<Guess> TodayGuesses => _todayGuesses ??= Guesses.Where(g => g.Date == DateTime.Today).ToList();
 
 	public readonly static Dictionary<string, string> Books
 		= new()
