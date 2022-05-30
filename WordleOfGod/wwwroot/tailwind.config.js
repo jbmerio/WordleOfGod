@@ -1,6 +1,7 @@
 module.exports = {
     content: [
         "../**/*.{razor,html,cshtml}",
+        //"./node_modules/flowbite/**/*.js"
     ],
     theme: {
         fontFamily: {
@@ -75,6 +76,6 @@ module.exports = {
         }
     },
     plugins: [
-        require("tailwind-scrollbar"),
+        //require("flowbite/plugin"),
     ],
 }

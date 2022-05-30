@@ -60,16 +60,7 @@
         <a class="dismiss">🗙</a>
     </div>
 
-    <script>
-        function pageLoaded() {
-            var acc = document.getElementsByClassName("accordion")[0];
-            acc.classList.toggle("active");
-            var panel = acc.nextElementSibling;
-            if (!panel.style.maxHeight) {
-                panel.style.maxHeight = panel.scrollHeight + "px";
-            }
-        }
-    </script>
+    <script src="js/app.js"></script>
     <script src="_framework/blazor.webassembly.js"></script>
     <script>navigator.serviceWorker.register('service-worker.js');</script>
 </body>
