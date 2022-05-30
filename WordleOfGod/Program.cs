@@ -1,3 +1,4 @@
+using BlazorApplicationInsights;
 using Blazored.LocalStorage;
 using Blazored.Toast;
 using Microsoft.AspNetCore.Components.Web;
@@ -12,5 +13,6 @@ builder.RootComponents.Add<HeadOutlet>("head::after");
 builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
 builder.Services.AddBlazoredLocalStorage();
 builder.Services.AddBlazoredToast();
+builder.Services.AddBlazorApplicationInsights();
 
 await builder.Build().RunAsync();
